@@ -16,3 +16,22 @@ packages = ["scrolls"]
 [tool.hatch.build.targets.wheel.force-include]
 "scrolls/seer" = "scrolls/seer"
 "scrolls/tome" = "scrolls/tome"
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "UP",   # pyupgrade
+    "B",    # flake8-bugbear
+    "SIM",  # flake8-simplify
+    "RUF",  # ruff-specific
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["scrolls"]
