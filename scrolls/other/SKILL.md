@@ -2,6 +2,10 @@
 
 A collection of supplementary skills for domain name intelligence, security analysis, and operational workflows. These skills complement Seer's diagnostic capabilities with higher-level analysis, threat detection, and reference knowledge.
 
+## Reference
+
+- [Error Handling & Resilience](reference/error-handling.md) — How to handle tool failures, partial results, and continue making progress
+
 ## Skills
 
 ### Analysis & Auditing
