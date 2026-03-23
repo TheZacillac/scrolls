@@ -45,8 +45,12 @@ def skill_file(name: str, filename: str = "SKILL.md") -> Path:
 
     Raises:
         FileNotFoundError: If the skill or file does not exist.
+        ValueError: If the resolved path escapes the skill directory.
     """
-    path = skill_path(name) / filename
+    base = skill_path(name).resolve()
+    path = (base / filename).resolve()
+    if not path.is_relative_to(base):
+        raise ValueError(f"filename '{filename}' escapes the skill directory")
     if not path.is_file():
         raise FileNotFoundError(f"File '{filename}' not found in skill '{name}' at {path}")
     return path
