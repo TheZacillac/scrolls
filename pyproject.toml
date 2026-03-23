@@ -16,6 +16,7 @@ packages = ["scrolls"]
 [tool.hatch.build.targets.wheel.force-include]
 "scrolls/seer" = "scrolls/seer"
 "scrolls/tome" = "scrolls/tome"
+"scrolls/other" = "scrolls/other"
 
 [tool.ruff]
 line-length = 100
