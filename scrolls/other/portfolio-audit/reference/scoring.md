@@ -7,10 +7,10 @@ Assign points per category (0–100 scale):
 | Category | Weight | Scoring |
 |----------|--------|---------|
 | **Registration** | 25% | Expiry risk, lock status, auto-renew |
-| **DNS** | 25% | NS redundancy, propagation, DNSSEC |
+| **DNS** | 25% | NS redundancy, propagation, dangling records |
 | **SSL/TLS** | 20% | Cert validity, expiry, configuration |
 | **Email Auth** | 15% | SPF + DMARC + DKIM presence and policy strength |
-| **Security** | 15% | CAA, DNSSEC, registrar lock, WHOIS privacy |
+| **Security** | 15% | CAA, registrar lock, WHOIS privacy |
 
 ## Portfolio Score
 

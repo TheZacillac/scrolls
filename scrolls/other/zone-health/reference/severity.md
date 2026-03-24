@@ -6,8 +6,8 @@
 |----------|----------|---------|
 | **Critical** | Security vulnerability or service outage risk | Dangling CNAME (subdomain takeover), no NS, DNSSEC chain broken |
 | **High** | Significant misconfiguration affecting deliverability or security | No SPF, DMARC `p=none` permanently, CNAME at apex, MX pointing to CNAME |
-| **Medium** | Best practice violation with operational impact | Single NS, no CAA, no DNSSEC, inconsistent TTLs |
-| **Low** | Advisory / optimization opportunity | Missing AAAA, stale TXT records, no null MX on non-mail domain |
+| **Medium** | Best practice violation with operational impact | Single NS, no CAA, inconsistent TTLs |
+| **Low** | Advisory / optimization opportunity | No DNSSEC, missing AAAA, stale TXT records, no null MX on non-mail domain |
 
 ## Audit Report Template
 

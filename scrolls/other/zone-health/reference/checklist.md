@@ -89,10 +89,11 @@ example.com.  IN CAA  0 iodef "mailto:security@example.com"
 - [ ] `issuewild` explicitly set (doesn't inherit from `issue`)
 - [ ] `iodef` tag present with valid contact
 
-## 8. DNSSEC
+## 8. DNSSEC (Advisory)
 
-**Checks:**
-- [ ] Zone is DNSSEC-signed (`seer dnssec example.com`)
+> **Note:** DNSSEC has low adoption among major brands due to the operational complexity and risk of disruption to critical DNS services. Treat absence of DNSSEC as low severity. If DNSSEC is deployed, validate the chain is healthy.
+
+**Checks (if DNSSEC is enabled):**
 - [ ] DS record in parent zone matches DNSKEY
 - [ ] Signature not expired
 - [ ] Algorithm is current — ECDSAP256SHA256 (13) or ED25519 (15) preferred

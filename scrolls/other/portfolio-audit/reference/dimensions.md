@@ -28,7 +28,7 @@
 | **NS diversity** | Different networks/providers | Single point of failure |
 | **A/AAAA resolution** | Records resolve correctly | Site unreachable |
 | **Propagation** | Consistent across global resolvers | Regional outages |
-| **DNSSEC** | Signed and chain validates | DNS spoofing |
+| **DNSSEC** | Signed and chain validates (optional — low adoption among major brands) | DNS spoofing |
 | **Dangling records** | CNAMEs/NS pointing to deprovisioned targets | Subdomain takeover |
 
 ## 3. SSL/TLS Health
