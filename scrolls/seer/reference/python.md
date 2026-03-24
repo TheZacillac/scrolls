@@ -12,5 +12,8 @@ status = seer.status("example.com")
 
 # Bulk
 results = seer.bulk_lookup(["example.com", "google.com"], concurrency=10)
-results = seer.bulk_status(["example.com", "google.com"])
+results = seer.bulk_whois(["example.com", "google.com"], concurrency=10)
+results = seer.bulk_dig(["example.com", "google.com"], record_type="A", concurrency=10)
+results = seer.bulk_propagation(["example.com", "google.com"], record_type="A", concurrency=5)
+results = seer.bulk_status(["example.com", "google.com"], concurrency=10)
 ```

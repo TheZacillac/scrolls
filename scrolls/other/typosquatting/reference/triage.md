@@ -9,13 +9,16 @@ seer avail exampl.com             # Check availability
 seer lookup exampl.com            # WHOIS + RDAP (if registered)
 seer status exampl.com            # Full health check
 seer ssl exampl.com               # SSL certificate (who's operating it?)
-seer dig exampl.com A MX TXT      # Where does it point?
+seer dig exampl.com A              # Where does it point?
+seer dig exampl.com MX
+seer dig exampl.com TXT
 ```
 
 ### Bulk Availability Check
 
 ```bash
-seer bulk avail exampl.com exmple.com exaple.com examle.com exampe.com --format json
+echo -e "exampl.com\nexmple.com\nexaple.com\nexamle.com\nexampe.com" > candidates.txt
+seer --format json bulk avail candidates.txt
 ```
 
 Exit codes: `0` = available (not registered), `1` = taken (registered).
@@ -23,7 +26,8 @@ Exit codes: `0` = available (not registered), `1` = taken (registered).
 ### Triage Registered Domains
 
 ```bash
-seer bulk lookup exampl.com exmple.com --format json
+echo -e "exampl.com\nexmple.com" > triage.txt
+seer --format json bulk lookup triage.txt
 seer status exampl.com
 seer ssl exampl.com
 ```
@@ -54,7 +58,7 @@ seer ssl exampl.com
 ```bash
 seer watch add exampl.com
 seer watch add exmple.com
-seer watch check
+seer watch
 ```
 
 ### Alert Triggers

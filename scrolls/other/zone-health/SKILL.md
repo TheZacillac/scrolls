@@ -7,9 +7,17 @@ A DNS zone health audit evaluates a domain's DNS configuration against best prac
 ## Quick Start
 
 ```bash
-seer dig example.com SOA NS A AAAA MX TXT CNAME CAA
+seer dig example.com SOA
+seer dig example.com NS
+seer dig example.com A
+seer dig example.com AAAA
+seer dig example.com MX
+seer dig example.com TXT
+seer dig example.com CNAME
+seer dig example.com CAA
 seer dnssec example.com
-seer prop example.com A NS
+seer prop example.com A
+seer prop example.com NS
 seer status example.com
 ```
 

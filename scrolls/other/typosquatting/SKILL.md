@@ -13,7 +13,8 @@ seer lookup exampl.com
 seer status exampl.com
 
 # Bulk check generated candidates
-seer bulk avail exampl.com exmple.com exaple.com examle.com --format json
+echo -e "exampl.com\nexmple.com\nexaple.com\nexamle.com" > candidates.txt
+seer --format json bulk avail candidates.txt
 ```
 
 ## Reference

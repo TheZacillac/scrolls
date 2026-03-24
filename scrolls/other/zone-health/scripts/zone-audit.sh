@@ -18,8 +18,12 @@ echo "--- NS ---"
 seer dig "${DOMAIN}" NS 2>/dev/null || echo "  No NS records"
 echo ""
 
-echo "--- A / AAAA ---"
-seer dig "${DOMAIN}" A AAAA 2>/dev/null || echo "  No A/AAAA records"
+echo "--- A ---"
+seer dig "${DOMAIN}" A 2>/dev/null || echo "  No A records"
+echo ""
+
+echo "--- AAAA ---"
+seer dig "${DOMAIN}" AAAA 2>/dev/null || echo "  No AAAA records"
 echo ""
 
 echo "--- MX ---"
@@ -31,7 +35,11 @@ seer dig "${DOMAIN}" TXT 2>/dev/null || echo "  No TXT records"
 echo ""
 
 echo "--- CNAME (www) ---"
-seer dig "www.${DOMAIN}" CNAME A 2>/dev/null || echo "  No www records"
+seer dig "www.${DOMAIN}" CNAME 2>/dev/null || echo "  No www CNAME record"
+echo ""
+
+echo "--- A (www) ---"
+seer dig "www.${DOMAIN}" A 2>/dev/null || echo "  No www A record"
 echo ""
 
 echo "--- CAA ---"
