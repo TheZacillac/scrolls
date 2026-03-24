@@ -3,10 +3,10 @@
 from pathlib import Path
 
 try:
-    from importlib.metadata import version
+    from importlib.metadata import version, PackageNotFoundError
 
     __version__ = version("scrolls")
-except Exception:
+except PackageNotFoundError:
     __version__ = "0.1.0"
 
 
@@ -19,14 +19,17 @@ def skill_path(name: str) -> Path:
     """Return the path to a specific skill's directory.
 
     Args:
-        name: Skill name (e.g., "seer", "tome").
+        name: Skill name (e.g., "seer", "tome", "other/email-auth").
 
     Returns:
         Path to the skill directory.
 
     Raises:
         FileNotFoundError: If the skill does not exist.
+        ValueError: If the skill name contains path traversal characters.
     """
+    if "\\" in name or name.startswith("."):
+        raise ValueError(f"Invalid skill name: '{name}'")
     path = skills_path() / name
     if not path.is_dir():
         raise FileNotFoundError(f"Skill '{name}' not found at {path}")
@@ -57,9 +60,21 @@ def skill_file(name: str, filename: str = "SKILL.md") -> Path:
 
 
 def list_skills() -> list[str]:
-    """Return the names of all available skills."""
-    return sorted(
-        p.name
-        for p in skills_path().iterdir()
-        if p.is_dir() and not p.name.startswith(("_", ".")) and (p / "SKILL.md").exists()
-    )
+    """Return the names of all available skills, including nested namespace skills."""
+    results = []
+    base = skills_path()
+    for p in base.iterdir():
+        if not p.is_dir() or p.name.startswith(("_", ".")):
+            continue
+        if (p / "SKILL.md").exists():
+            results.append(p.name)
+        else:
+            # One level of namespace containers (e.g., other/)
+            for sub in p.iterdir():
+                if (
+                    sub.is_dir()
+                    and not sub.name.startswith(("_", "."))
+                    and (sub / "SKILL.md").exists()
+                ):
+                    results.append(f"{p.name}/{sub.name}")
+    return sorted(results)
