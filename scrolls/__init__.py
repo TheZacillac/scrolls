@@ -28,9 +28,10 @@ def skill_path(name: str) -> Path:
         FileNotFoundError: If the skill does not exist.
         ValueError: If the skill name contains path traversal characters.
     """
-    if "\\" in name or name.startswith("."):
+    base = skills_path().resolve()
+    path = (base / name).resolve()
+    if not path.is_relative_to(base):
         raise ValueError(f"Invalid skill name: '{name}'")
-    path = skills_path() / name
     if not path.is_dir():
         raise FileNotFoundError(f"Skill '{name}' not found at {path}")
     return path

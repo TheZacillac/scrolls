@@ -36,7 +36,7 @@ scrolls/
 ```python
 import scrolls
 
-scrolls.list_skills()                          # ['seer', 'tome']
+scrolls.list_skills()                          # ['other/cdn-detection', 'other/email-auth', ..., 'seer', 'tome']
 scrolls.skills_path()                          # Path to skills directory
 scrolls.skill_path("seer")                     # Path to seer skill directory
 scrolls.skill_file("seer")                     # Path to seer/SKILL.md
