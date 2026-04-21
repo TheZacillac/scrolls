@@ -13,13 +13,16 @@ cargo run --release -p seer-cli -- <command>
 ## Lookup Commands
 
 ```bash
-# Smart lookup (concurrent RDAP + WHOIS, availability fallback)
+# Smart lookup (RDAP-first, WHOIS fallback)
 seer lookup example.com
+
+# Comprehensive info (merges RDAP + WHOIS into a flat field set)
+seer info example.com
 
 # WHOIS only
 seer whois example.com
 
-# RDAP (domains, IPs, ASNs)
+# RDAP (auto-routes domains, IPs, ASNs)
 seer rdap example.com
 seer rdap 8.8.8.8
 seer rdap AS15169
@@ -105,16 +108,31 @@ Process domains from a file, output to CSV:
 
 ```bash
 seer bulk lookup domains.txt
+seer bulk info domains.txt
 seer bulk whois domains.txt
 seer bulk rdap domains.txt
 seer bulk dig domains.txt MX
 seer bulk prop domains.txt
 seer bulk status domains.txt
 seer bulk avail domains.txt
-seer bulk status domains.txt -o results.csv    # Custom output path
+seer bulk status domains.txt -o results.csv           # Custom output path
+seer bulk status domains.txt --progress verbose       # Per-item completion lines
 ```
 
 Input file format: one domain per line (# for comments), or CSV (first column).
+
+CSV output includes **anti-formula protection** (leading `=`, `+`, `-`, `@`
+are escaped) so values are safe to open in spreadsheets. Use
+`--format json` for programmatic consumption without spreadsheet escaping.
+
+### `--progress` modes
+
+| Mode | Behavior |
+|------|----------|
+| `bar` | Progress bar only (default in a TTY) |
+| `verbose` | Bar plus per-item completion lines |
+| `failures` | Bar plus per-failure lines; successes silent |
+| `none` | No bar, no per-item output (default when piped or `--format json`) |
 
 ## Output Formats
 
@@ -157,7 +175,8 @@ seer --quiet --fields registrar,expires lookup example.com   # Multiple fields
 | Operation | Columns |
 |-----------|---------|
 | **status** | domain, success, http_status, http_status_text, title, ssl_issuer, ssl_valid_until, ssl_days_remaining, domain_expires, domain_days_remaining, registrar, dns_resolves, dns_a_records, dns_aaaa_records, dns_cname, dns_nameservers, duration_ms, error |
-| **lookup/whois/rdap** | domain, success, registrar, created, expires, updated, duration_ms, error |
+| **lookup/whois/rdap** | domain, success, registrar, created, expires, updated, duration_ms, availability_verdict, error |
+| **info** | domain, success, source, registrar, registrant, organization, created, expires, updated, nameservers, status, dnssec, …, whois_server, rdap_url, availability_verdict, duration_ms, error |
 | **dig** | domain, success, record_type, records, duration_ms, error |
 | **prop** | domain, success, propagation_pct, servers_total, servers_responded, duration_ms, error |
 | **avail** | domain, success, available, confidence, method, details, duration_ms, error |

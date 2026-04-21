@@ -99,7 +99,7 @@ The seer skill contains comprehensive reference docs covering:
 - Environment variables: `RUST_LOG`, `SEER_CORS_ORIGINS`, `SEER_RATE_LIMIT`
 
 **mcp.md** — MCP server:
-- 13 available tools
+- 15 available tools
 - Claude Desktop configuration
 
 **python.md** — Python library:
