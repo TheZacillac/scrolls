@@ -10,13 +10,11 @@ requires-python = ">=3.9"
 license = { text = "MIT" }
 authors = [{ name = "Zac Roach" }]
 
+# packages already includes every file under scrolls/ recursively (the
+# skill .md docs included) — a force-include of the same dirs makes
+# hatchling >=1.19 fail with "second file added at the same path".
 [tool.hatch.build.targets.wheel]
 packages = ["scrolls"]
-
-[tool.hatch.build.targets.wheel.force-include]
-"scrolls/seer" = "scrolls/seer"
-"scrolls/tome" = "scrolls/tome"
-"scrolls/other" = "scrolls/other"
 
 [tool.ruff]
 line-length = 100
